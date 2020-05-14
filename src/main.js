@@ -6,6 +6,8 @@ import store from "./store";
 
 Vue.config.productionTip = false;
 
+store.dispatch('getUser');
+
 new Vue({
   router,
   store,

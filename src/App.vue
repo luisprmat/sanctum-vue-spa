@@ -3,11 +3,27 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
-	  <router-link to="/login">Login</router-link>
+			<template v-if="$store.state.auth">
+				<span>{{ $store.state.user.name }}</span> | <button @click="logout">Logout</button> |
+			</template>
+			<template v-else>
+				<router-link to="/login">Login</router-link>
+			</template>
     </div>
     <router-view />
   </div>
 </template>
+
+<script>
+export default {
+	methods: {
+		async logout() {
+			await this.$store.dispatch('logout');
+			return this.$router.replace('/login');
+		}
+	}
+}
+</script>
 
 <style>
 #app {
